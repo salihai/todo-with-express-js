@@ -34,20 +34,20 @@ app.post('/', (req, res) =>{
 });
 
 app.put('/', (req, res) =>{
+
     const data = req.body;
 
     const item = todos.find((item) => item.id == req.query.id);
 
-    if(todos.includes(item)){
+    if(item!=undefined){
         item.name = data.name;
         item.description = data.description;
+        res.send(todos);
     }else{
-        //res.send('400 Bad Request');
-        console.error('400 Bad Request');
+        res.status(400).send('400 Bad Request');
     }
-    
 
-    res.send(todos);
+    //res.send(todos);
     //console.log(req.query);
     //console.log(req.body);
 });
@@ -58,15 +58,14 @@ app.delete('/', (req, res) =>{
 
     const index = todos.indexOf(item);
     
-    if(todos.includes(item)){
+    if(item!=undefined){
         todos.splice(index, 1);
+        res.send(todos);
     }else{
-        //res.send('400 Bad Request');
-        console.error('400 Bad Request');
+        res.status(400).send('400 Bad Request');
     }
     
-    
-    res.send(todos);
+    //res.send(todos);
     //console.log(req.query.id);
 });
 
