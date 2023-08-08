@@ -35,14 +35,20 @@ app.post('/', (req, res) =>{
 
 app.put('/', (req, res) =>{
     const data = req.body;
+
+    const item = todos.find((item) => item.id == req.query.id);
     
-    for(let i=0; i<todos.length; i++){
+    item.name = data.name;
+    item.description = data.description;
+
+    /*for(let i=0; i<todos.length; i++){
         let todoItem = todos[i];
         if(todoItem.id == req.query.id){
             todoItem['name'] = data.name;
             todoItem["description"] = data.description;
         }
-    }
+    }*/
+
     res.send(todos);
     //console.log(req.query);
     //console.log(req.body);
@@ -50,13 +56,18 @@ app.put('/', (req, res) =>{
 
 app.delete('/', (req, res) =>{
 
+    const item = todos.find((item) => item.id == req.query.id);
+
+    index = todos.indexOf(item);
     
-    for(let i=0; i<todos.length; i++){
+    todos.splice(index, 1);
+    
+    /*for(let i=0; i<todos.length; i++){
         let todoItem = todos[i];
         if(todoItem.id == req.query.id){
             todos.splice(i);
         }
-    }
+    }*/
     
     res.send(todos);
     //console.log(req.query.id);
