@@ -39,7 +39,7 @@ app.put('/', (req, res) =>{
 
     const item = todos.find((item) => item.id == req.query.id);
 
-    if(item!=undefined){
+    if(item){
         item.name = data.name;
         item.description = data.description;
         res.send(todos);
@@ -58,7 +58,7 @@ app.delete('/', (req, res) =>{
 
     const index = todos.indexOf(item);
     
-    if(item!=undefined){
+    if(item){
         todos.splice(index, 1);
         res.send(todos);
     }else{
