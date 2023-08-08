@@ -37,17 +37,15 @@ app.put('/', (req, res) =>{
     const data = req.body;
 
     const item = todos.find((item) => item.id == req.query.id);
-    
-    item.name = data.name;
-    item.description = data.description;
 
-    /*for(let i=0; i<todos.length; i++){
-        let todoItem = todos[i];
-        if(todoItem.id == req.query.id){
-            todoItem['name'] = data.name;
-            todoItem["description"] = data.description;
-        }
-    }*/
+    if(todos.includes(item)){
+        item.name = data.name;
+        item.description = data.description;
+    }else{
+        //res.send('400 Bad Request');
+        console.error('400 Bad Request');
+    }
+    
 
     res.send(todos);
     //console.log(req.query);
@@ -58,16 +56,15 @@ app.delete('/', (req, res) =>{
 
     const item = todos.find((item) => item.id == req.query.id);
 
-    index = todos.indexOf(item);
+    const index = todos.indexOf(item);
     
-    todos.splice(index, 1);
+    if(todos.includes(item)){
+        todos.splice(index, 1);
+    }else{
+        //res.send('400 Bad Request');
+        console.error('400 Bad Request');
+    }
     
-    /*for(let i=0; i<todos.length; i++){
-        let todoItem = todos[i];
-        if(todoItem.id == req.query.id){
-            todos.splice(i);
-        }
-    }*/
     
     res.send(todos);
     //console.log(req.query.id);
